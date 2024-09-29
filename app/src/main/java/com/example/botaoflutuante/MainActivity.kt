@@ -12,14 +12,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material3.ExtendedFloatingActionButton
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
-import androidx.compose.material3.LargeFloatingActionButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SmallFloatingActionButton
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,24 +25,15 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             BotaoFlutuanteTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    FloatingActionButtonExamples()
                 }
             }
         }
     }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
 }
 
 @Composable
@@ -61,67 +45,78 @@ fun FloatingActionButtonExamples() {
         verticalArrangement = Arrangement.spacedBy(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+        // Exemplo do FAB padrão
         Text("Floating action button:")
-        Example(onClick = { Log.d("FAB", "FAB clicked.") })
+        Example(onClick = { Log.d("FAB", "FAB padrão clicado.") })
+
+        // Exemplo de Small FAB com cores personalizadas
         Text("Small floating action button:")
-        SmallExample(onClick = { Log.d("FAB", "Small FAB clicked.") })
+        SmallExample(onClick = { Log.d("FAB", "Small FAB clicado.") })
+
+        // Exemplo de Large FAB
         Text("Large floating action button:")
-        LargeExample(onClick = { Log.d("FAB", "Large FAB clicked.") })
+        LargeExample(onClick = { Log.d("FAB", "Large FAB clicado.") })
+
+        // Exemplo de Extended FAB com texto
         Text("Floating action button with text:")
-        ExtendedExample(onClick = { Log.d("FAB", "Extended FAB clicked.") })
+        ExtendedExample(onClick = { Log.d("FAB", "Extended FAB clicado.") })
     }
 }
 
-// [START android_compose_components_fab]
+// Exemplo de um FAB padrão
 @Composable
 fun Example(onClick: () -> Unit) {
     FloatingActionButton(
         onClick = { onClick() },
+        containerColor = MaterialTheme.colorScheme.primary, // Cor de fundo do FAB
+        contentColor = MaterialTheme.colorScheme.onPrimary // Cor do ícone
     ) {
-        Icon(Icons.Filled.Add, "Floating action button.")
+        Icon(Icons.Filled.Add, contentDescription = "Floating action button")
     }
 }
-// [END android_compose_components_fab]
 
-// [START android_compose_components_extendedfab]
+// Exemplo de um FAB com texto (Extended FAB)
 @Composable
 fun ExtendedExample(onClick: () -> Unit) {
     ExtendedFloatingActionButton(
         onClick = { onClick() },
-        icon = { Icon(Icons.Filled.Edit, "Extended floating action button.") },
-        text = { Text(text = "Extended FAB") },
+        icon = { Icon(Icons.Filled.Edit, contentDescription = "Extended floating action button") },
+        text = { Text("Extended FAB") },
+        containerColor = MaterialTheme.colorScheme.secondaryContainer,
+        contentColor = MaterialTheme.colorScheme.onSecondaryContainer
     )
 }
-// [END android_compose_components_extendedfab]
 
-// [START android_compose_components_smallfab]
+// Exemplo de um Small FAB com cores personalizadas
 @Composable
 fun SmallExample(onClick: () -> Unit) {
     SmallFloatingActionButton(
         onClick = { onClick() },
         containerColor = MaterialTheme.colorScheme.secondaryContainer,
-        contentColor = MaterialTheme.colorScheme.secondary
+        contentColor = MaterialTheme.colorScheme.onSecondaryContainer
     ) {
-        Icon(Icons.Filled.Add, "Small floating action button.")
+        Icon(Icons.Filled.Add, contentDescription = "Small floating action button")
     }
 }
-// [END android_compose_components_smallfab]
 
-// [START android_compose_components_largefab]
+// Exemplo de um Large FAB com formato circular
 @Composable
 fun LargeExample(onClick: () -> Unit) {
     LargeFloatingActionButton(
         onClick = { onClick() },
-        shape = CircleShape,
+        shape = CircleShape, // Forma circular
+        containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+        contentColor = MaterialTheme.colorScheme.onTertiaryContainer
     ) {
-        Icon(Icons.Filled.Add, "Large floating action button")
+        Icon(Icons.Filled.Add, contentDescription = "Large floating action button")
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun FloatingActionButtonExamplesPreview() {
     BotaoFlutuanteTheme {
         FloatingActionButtonExamples()
     }
 }
+
